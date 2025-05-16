@@ -16,13 +16,18 @@ function App() {
 
     const name = form.name.value;
     const email = form.email.value;
-    const user = { name, email };
-    console.log(user);
+    const user2 = { name, email };
+    console.log(user2);
 
-
- 
-
-
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user2)
+    })
+      .then((res) => res.json())
+      .then((data) => setUsers([...users, data]));
   };
 
   return (
@@ -38,11 +43,12 @@ function App() {
         <button type="submit">Submit</button>
       </form>
 
-
       {/* show user info UI */}
-      {
-        users.map((info) => <p key={info.id}>{info.id} {info.name} {info.email} </p> )
-      }
+      {users.map((info) => (
+        <p key={info.id}>
+          {info.id} {info.name} {info.email}
+        </p>
+      ))}
     </>
   );
 }
