@@ -24,10 +24,16 @@ function App() {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(user2)
+      body: JSON.stringify(user2),
     })
       .then((res) => res.json())
-      .then((data) => setUsers([...users, data]));
+      .then((data) => {
+        // set users
+        setUsers([...users, data]);
+
+        // reset form
+        form.reset()
+      });
   };
 
   return (
